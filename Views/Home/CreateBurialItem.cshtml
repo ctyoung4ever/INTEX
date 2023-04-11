@@ -1,0 +1,203 @@
+﻿@model INTEX.Models.Burialmain
+
+@{
+    ViewData["Title"] = "CreateBurialItem";
+}
+
+<h1>CreateBurialItem</h1>
+
+<h4>Burialmain</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateBurialItem">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Squarenorthsouth" class="control-label"></label>
+                <input asp-for="Squarenorthsouth" class="form-control" />
+                <span asp-validation-for="Squarenorthsouth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Headdirection" class="control-label"></label>
+                <input asp-for="Headdirection" class="form-control" />
+                <span asp-validation-for="Headdirection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sex" class="control-label"></label>
+                <input asp-for="Sex" class="form-control" />
+                <span asp-validation-for="Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Northsouth" class="control-label"></label>
+                <input asp-for="Northsouth" class="form-control" />
+                <span asp-validation-for="Northsouth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Depth" class="control-label"></label>
+                <input asp-for="Depth" class="form-control" />
+                <span asp-validation-for="Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Eastwest" class="control-label"></label>
+                <input asp-for="Eastwest" class="form-control" />
+                <span asp-validation-for="Eastwest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adultsubadult" class="control-label"></label>
+                <input asp-for="Adultsubadult" class="form-control" />
+                <span asp-validation-for="Adultsubadult" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Facebundles" class="control-label"></label>
+                <input asp-for="Facebundles" class="form-control" />
+                <span asp-validation-for="Facebundles" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Southtohead" class="control-label"></label>
+                <input asp-for="Southtohead" class="form-control" />
+                <span asp-validation-for="Southtohead" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preservation" class="control-label"></label>
+                <input asp-for="Preservation" class="form-control" />
+                <span asp-validation-for="Preservation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fieldbookpage" class="control-label"></label>
+                <input asp-for="Fieldbookpage" class="form-control" />
+                <span asp-validation-for="Fieldbookpage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Squareeastwest" class="control-label"></label>
+                <input asp-for="Squareeastwest" class="form-control" />
+                <span asp-validation-for="Squareeastwest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Goods" class="control-label"></label>
+                <input asp-for="Goods" class="form-control" />
+                <span asp-validation-for="Goods" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wrapping" class="control-label"></label>
+                <input asp-for="Wrapping" class="form-control" />
+                <span asp-validation-for="Wrapping" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haircolor" class="control-label"></label>
+                <input asp-for="Haircolor" class="form-control" />
+                <span asp-validation-for="Haircolor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Westtohead" class="control-label"></label>
+                <input asp-for="Westtohead" class="form-control" />
+                <span asp-validation-for="Westtohead" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Samplescollected" class="control-label"></label>
+                <input asp-for="Samplescollected" class="form-control" />
+                <span asp-validation-for="Samplescollected" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Area" class="control-label"></label>
+                <input asp-for="Area" class="form-control" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Burialid" class="control-label"></label>
+                <input asp-for="Burialid" class="form-control" />
+                <span asp-validation-for="Burialid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Length" class="control-label"></label>
+                <input asp-for="Length" class="form-control" />
+                <span asp-validation-for="Length" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Burialnumber" class="control-label"></label>
+                <input asp-for="Burialnumber" class="form-control" />
+                <span asp-validation-for="Burialnumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dataexpertinitials" class="control-label"></label>
+                <input asp-for="Dataexpertinitials" class="form-control" />
+                <span asp-validation-for="Dataexpertinitials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Westtofeet" class="control-label"></label>
+                <input asp-for="Westtofeet" class="form-control" />
+                <span asp-validation-for="Westtofeet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ageatdeath" class="control-label"></label>
+                <input asp-for="Ageatdeath" class="form-control" />
+                <span asp-validation-for="Ageatdeath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Southtofeet" class="control-label"></label>
+                <input asp-for="Southtofeet" class="form-control" />
+                <span asp-validation-for="Southtofeet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Excavationrecorder" class="control-label"></label>
+                <input asp-for="Excavationrecorder" class="form-control" />
+                <span asp-validation-for="Excavationrecorder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photos" class="control-label"></label>
+                <input asp-for="Photos" class="form-control" />
+                <span asp-validation-for="Photos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hair" class="control-label"></label>
+                <input asp-for="Hair" class="form-control" />
+                <span asp-validation-for="Hair" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Burialmaterials" class="control-label"></label>
+                <input asp-for="Burialmaterials" class="form-control" />
+                <span asp-validation-for="Burialmaterials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dateofexcavation" class="control-label"></label>
+                <input asp-for="Dateofexcavation" class="form-control" />
+                <span asp-validation-for="Dateofexcavation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fieldbookexcavationyear" class="control-label"></label>
+                <input asp-for="Fieldbookexcavationyear" class="form-control" />
+                <span asp-validation-for="Fieldbookexcavationyear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clusternumber" class="control-label"></label>
+                <input asp-for="Clusternumber" class="form-control" />
+                <span asp-validation-for="Clusternumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shaftnumber" class="control-label"></label>
+                <input asp-for="Shaftnumber" class="form-control" />
+                <span asp-validation-for="Shaftnumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="BurialList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

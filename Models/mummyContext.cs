@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace INTEX.Models
 {
-    public partial class IntexDBContext : DbContext
+    public partial class mummyContext : DbContext
     {
-        public IntexDBContext()
+        public mummyContext()
         {
         }
 
-        public IntexDBContext(DbContextOptions<IntexDBContext> options)
+        public mummyContext(DbContextOptions<mummyContext> options)
             : base(options)
         {
         }

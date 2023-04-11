@@ -1,0 +1,68 @@
+﻿@*@page*@
+@*@model MummyWeb.Views.Home.BurialListModel*@
+
+@{
+}
+
+@*@model IQueryable<Burialmain>*@
+@model BurialViewModel
+
+<h1>Fag el-Gamous Burials</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>ID</td>
+            <td>Square N/S</td>
+            <td>Square E/W</td>
+            <td>Area</td>
+            <td>Number</td>
+            <td>Burial Depth</td>
+            <td>Head Direction</td>
+            <td>Age at Death</td>
+            <td>Estimate Stature</td>
+            <td>Sex</td>
+            <td>Hair Color</td>
+            <td>Textile Structure</td>
+            <td>Textile Function</td>
+            <td>Textile Color</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Burials)
+        {
+        <tr>
+            <td>@x.Id</td>
+            <td>@x.Squarenorthsouth @x.Northsouth</td>
+            <td>@x.Squareeastwest @x.Eastwest</td>
+            <td>@x.Area</td>
+            <td>@x.Burialnumber</td>
+            <td>@x.Depth</td>
+            <td>@x.Headdirection</td>
+            <td>@x.Ageatdeath</td>
+            <td>@x.Length</td>
+            <td>@x.Sex</td>
+            <td>@x.Haircolor</td>
+            <td><a asp-controller="Home" asp-action="detailsburialitem" asp-route-id="@x.Id">View Details</a></td>
+            <td><a asp-controller="Home" asp-action="editBurialList" asp-route-id="@x.Id">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="deleteBurialItem" asp-route-id="@x.Id">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<br />
+@*<a asp-action="BurialList" asp-route-pageNum="1">1</a>
+<a asp-action="BurialList" asp-route-pageNum="2">2</a>
+<a asp-action="BurialList" asp-route-pageNum="3">3</a>*@
+
+@*<div page-blah="@Model.PageInfo" page-action="BurialList" 
+      page-classes-enabled="true"></div>*@
+
+
+<div page-blah="@Model.PageInfo" page-action="BurialList" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1">
+
+</div>
