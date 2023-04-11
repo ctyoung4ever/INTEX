@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTEX", "INTEX.csproj", "{4674D244-0FD4-4F39-84F2-13E8E2B3FBC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4674D244-0FD4-4F39-84F2-13E8E2B3FBC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4674D244-0FD4-4F39-84F2-13E8E2B3FBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4674D244-0FD4-4F39-84F2-13E8E2B3FBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4674D244-0FD4-4F39-84F2-13E8E2B3FBC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D35CAC5-85D3-481B-A432-94E89D3471F1}
+	EndGlobalSection
+EndGlobal
