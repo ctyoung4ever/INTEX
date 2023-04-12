@@ -36,17 +36,16 @@ namespace INTEX
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +75,96 @@ namespace INTEX
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roles = new[] { "Admin", "Authorized", "Public" };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                        await roleManager.CreateAsync(new IdentityRole(role));
+
+                }
+            }
+
+
+            //Admin User authorization RBAC
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                string email = "admin@admin.com";
+                string password = "Admin123*";
+
+
+
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+
+                    await userManager.AddToRoleAsync(user, "Admin");
+
+                }
+            }
+
+            //Authorized User authorization RBAC
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                string email1 = "authorized@authorized.com";
+                string password1 = "Authorized123*";
+
+
+                if (await userManager.FindByEmailAsync(email1) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email1;
+                    user.Email = email1;
+
+                    await userManager.CreateAsync(user, password1);
+
+                    await userManager.AddToRoleAsync(user, "Authorized");
+
+                }
+
+            }
+
+
+            //Public User authorization RBAC
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                string email2 = "public@public.com";
+                string password2 = "Public123*";
+
+
+                if (await userManager.FindByEmailAsync(email2) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email2;
+                    user.Email = email2;
+
+                    await userManager.CreateAsync(user, password2);
+
+                    await userManager.AddToRoleAsync(user, "Public");
+
+                }
+
+            }
         }
     }
 }
+
+
+
+
+

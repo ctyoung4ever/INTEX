@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEX.Controllers
 {
@@ -34,6 +35,8 @@ namespace INTEX.Controllers
             return View();
         }
 
+
+        [Authorize(Roles = "Authorized")]
         public IActionResult BurialList(int pageNum = 1)
         {
             int pageSize = 50;
@@ -105,6 +108,7 @@ namespace INTEX.Controllers
 
             return View("detailsburialitem", application);
         }
+        [Authorize(Roles ="Admin")]
         public IActionResult Privacy()
         {
             return View();
