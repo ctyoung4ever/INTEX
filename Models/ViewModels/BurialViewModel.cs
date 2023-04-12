@@ -13,5 +13,6 @@ namespace INTEX.Models.ViewModels
         public List<Textile>? Textile { get; internal set; }
         public List<BurialmainTextile> TextileList { get; internal set; }
         public Bodyanalysischart? BodyAnalysis { get; internal set; }
+        public List<Photodata>? Photos { get; internal set; }
     }
 }
