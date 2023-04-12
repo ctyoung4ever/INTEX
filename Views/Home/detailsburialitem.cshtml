@@ -244,5 +244,11 @@
 
         </tr>
     }
-
+    @if (Model.BodyAnalysis != null)
+    {
+        <tr>
+            <td>@Model.BodyAnalysis.Id</td>
+            <td>@Model.BodyAnalysis.Squarenorthsouth</td>
+        </tr>   
+    }
 </tbody>

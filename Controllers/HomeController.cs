@@ -105,12 +105,15 @@ namespace INTEX.Controllers
             var burialMainTextiles = MummyContext.BurialmainTextile.Where(bt => bt.MainBurialmainid == id).ToList();
             var textileIds = burialMainTextiles.Select(bt => bt.MainTextileid);
             var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).ToList();
+            var bodyanalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == id);
+
 
             var viewModel = new BurialViewModel
             {
                 BurialMain = burialMain,
                 TextileList = burialMainTextiles,
-                Textile = textiles
+                Textile = textiles,
+                BodyAnalysis = bodyanalysis
             };
 
             return View("detailsburialitem", viewModel);
