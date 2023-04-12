@@ -36,7 +36,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Authorized")]
+        //[Authorize(Roles = "Authorized")]
         public IActionResult BurialList(int pageNum = 1)
         {
             int pageSize = 50;
@@ -122,7 +122,7 @@ namespace INTEX.Controllers
             return View("detailsburialitem", viewModel);
         }
 
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
 
 
 
