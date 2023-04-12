@@ -9,5 +9,9 @@ namespace INTEX.Models.ViewModels
     {
         public List<Burialmain> Burials { get; set; }
         public PageInfo PageInfo { get; set; }
+        public Burialmain BurialMain { get; internal set; }
+        public List<Textile>? Textile { get; internal set; }
+        public List<BurialmainTextile> TextileList { get; internal set; }
+        public Bodyanalysischart? BodyAnalysis { get; internal set; }
     }
 }
