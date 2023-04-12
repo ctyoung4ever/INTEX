@@ -101,10 +101,23 @@ namespace INTEX.Controllers
 
         public IActionResult detailsburialitem(long id)
         {
-            var application = MummyContext.Burialmain.Single(x => x.Id == id);
+            var burialMain = MummyContext.Burialmain.SingleOrDefault(x => x.Id == id);
+            var burialMainTextiles = MummyContext.BurialmainTextile.Where(bt => bt.MainBurialmainid == id).ToList();
+            var textileIds = burialMainTextiles.Select(bt => bt.MainTextileid);
+            var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).ToList();
 
-            return View("detailsburialitem", application);
+            var viewModel = new BurialViewModel
+            {
+                BurialMain = burialMain,
+                TextileList = burialMainTextiles,
+                Textile = textiles
+            };
+
+            return View("detailsburialitem", viewModel);
         }
+
+
+
         public IActionResult Privacy()
         {
             return View();
