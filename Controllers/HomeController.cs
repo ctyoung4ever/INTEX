@@ -109,14 +109,20 @@ namespace INTEX.Controllers
             var textileIds = burialMainTextiles.Select(bt => bt.MainTextileid);
             var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).ToList();
             var bodyanalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == id);
-
-
+            
+            var photoids = MummyContext.PhotodataTextile.Where(t => textileIds.Contains(t.MainTextileid));
+            var newids = photoids.Select(bt => bt.MainPhotodataid);
+            var photos = MummyContext.Photodata.Where(t => newids.Contains(t.Id)).ToList();
+            var c14 = MummyContext.C14.SingleOrDefault(x => x.Id == id);
+            //photodata connects to photodata_textile which connects to textile and burialmain
             var viewModel = new BurialViewModel
             {
                 BurialMain = burialMain,
                 TextileList = burialMainTextiles,
                 Textile = textiles,
-                BodyAnalysis = bodyanalysis
+                BodyAnalysis = bodyanalysis,
+                Photos = photos,
+                C14 = c14
             };
 
             return View("detailsburialitem", viewModel);
