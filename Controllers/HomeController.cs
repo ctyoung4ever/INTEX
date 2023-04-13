@@ -107,22 +107,49 @@ namespace INTEX.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteBurialItem(Burialmain viewModel)
+        public IActionResult DeleteBurialItem(Burialmain viewModel, BurialmainTextile bmt, Textile t,  PhotodataTextile pdt, Photodata pd, Bodyanalysischart bac)
         {
-            //var burialItem = MummyContext.Burialmain.Single(x => x.Id == viewModel.Id);
+            // Remove all textiles associated with the burial item
+            var textiles = MummyContext.BurialmainTextile.Where(t => t.MainBurialmainid == viewModel.Id).ToList();
+            foreach (var textile in textiles)
+            {
+                //remove all photos associated with each textile
+                t = MummyContext.Textile.Single(x => x.Id == textile.MainTextileid);
+                
+                var pdts = MummyContext.PhotodataTextile.Where(x => x.MainTextileid == t.Id).ToList();
+                foreach (var item in pdts)
+                {
+                    pd = MummyContext.Photodata.Single(x => x.Id == item.MainPhotodataid);
+                    MummyContext.PhotodataTextile.Remove(item);
+                    MummyContext.Photodata.Remove(pd);
+                }
+                MummyContext.BurialmainTextile.Remove(textile);
+                MummyContext.Textile.Remove(t);
+                
+            }
+
+            // Remove the body analysis chart, if it exists
+            bac = MummyContext.Bodyanalysischart.SingleOrDefault(b => b.Id == viewModel.Id);
+            if (bac != null)
+            {
+                MummyContext.Bodyanalysischart.Remove(bac);
+            }
+
+            // Remove the burial item
             MummyContext.Burialmain.Remove(viewModel);
             MummyContext.SaveChanges();
-            //MummyContext.Burialmain.Remove(burialItem);
-            //MummyContext.SaveChanges();
+
             return RedirectToAction("BurialList");
         }
+
+
 
         public IActionResult detailsburialitem(long id)
         {
             var burialMain = MummyContext.Burialmain.SingleOrDefault(x => x.Id == id);
             var burialMainTextiles = MummyContext.BurialmainTextile.Where(bt => bt.MainBurialmainid == id).ToList();
             var textileIds = burialMainTextiles.Select(bt => bt.MainTextileid);
-            var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).ToList();
+            var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).OrderBy(x => x.Id).ToList();
             var bodyanalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == id);
             
             var photoids = MummyContext.PhotodataTextile.Where(t => textileIds.Contains(t.MainTextileid));
@@ -148,23 +175,176 @@ namespace INTEX.Controllers
         [HttpGet]
         public IActionResult EditBodyAnalysis(long burialmainid)
         {
-            var bodyAnalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == burialmainid);
+            var bodyAnalysis = MummyContext.Bodyanalysischart.Single(x => x.Id == burialmainid);
+            
+            
 
-            if (bodyAnalysis == null)
-            {
-                return NotFound();
-            }
-
-            return View(bodyAnalysis);
+            return View("EditBodyAnalysis", bodyAnalysis);
         }
+        [HttpGet]
+        public IActionResult EditPicture(long pictureid)
+        {
+            var Photo = MummyContext.Photodata.Single(x => x.Id == pictureid);
+
+
+
+            return View("EditPicture", Photo);
+        }
+        [HttpGet]
+        public IActionResult EditTextile(long id)
+        {
+            var Textile = MummyContext.Textile.Single(x => x.Id == id);
+
+
+
+            return View("EditTextile", Textile);
+        }
+        [HttpPost]
+        public IActionResult EditBodyAnalysis(Bodyanalysischart viewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                MummyContext.Update(viewModel);
+                MummyContext.SaveChanges();
+                return RedirectToAction("BurialList");
+            }
+            else
+            {
+                return View("BurialList");
+            }
+        }
+        [HttpPost]
+        public IActionResult EditPicture(Photodata viewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                MummyContext.Update(viewModel);
+                MummyContext.SaveChanges();
+                return RedirectToAction("BurialList");
+            }
+            else
+            {
+                return View("BurialList");
+            }
+        }
+        [HttpPost]
+        public IActionResult EditTextile(Textile tex)
+        {
+
+            if (ModelState.IsValid)
+            {
+                MummyContext.Textile.Update(tex);
+                MummyContext.SaveChanges();
+                return RedirectToAction("BurialList");
+            }
+            else
+            {
+                return Error();
+            }
+        }
+
         public IActionResult CreateBodyAnalysis(long burialmainid)
         {
             var bodyAnalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == burialmainid);
 
+            Bodyanalysischart viewModel = new Bodyanalysischart
+            {
+                Id = burialmainid
+            };
+            return View(viewModel);
+        }
+        [HttpGet]
+        public IActionResult DeleteBodyAnalysis(long id)
+        {
+            var burialItem = MummyContext.Bodyanalysischart.Single(x => x.Id == id);
 
-            return View(bodyAnalysis);
+
+
+            return View(burialItem);
+        }
+        [HttpGet]
+        public IActionResult DeletePicture(long id)
+        {
+            var photoid = MummyContext.Photodata.Single(x => x.Id == id);
+            
+            
+
+            return View(photoid);
+        }
+        [HttpGet]
+        public IActionResult DeleteTextile(long id)
+        {
+            var textileid = MummyContext.Textile.Single(x => x.Id == id);
+
+
+
+            return View(textileid);
+        }
+        [HttpPost]
+        public IActionResult DeletePicture(Photodata viewModel, PhotodataTextile textile)
+        {
+
+            MummyContext.Photodata.Remove(viewModel);
+            textile = MummyContext.PhotodataTextile.Single(x => x.MainPhotodataid == viewModel.Id);
+            MummyContext.PhotodataTextile.Remove(textile);
+            MummyContext.SaveChanges();
+
+            return RedirectToAction("BurialList");
+        }
+        //[HttpPost]
+        //public IActionResult DeleteTextile(Textile viewModel, BurialmainTextile bmt, PhotodataTextile pdt, Photodata pd)
+        //{
+        //    MummyContext.Textile.Remove(viewModel);
+        //    bmt = MummyContext.BurialmainTextile.Single(x => x.MainTextileid == viewModel.Id);
+        //    pdt = MummyContext.PhotodataTextile.Single(x => x.MainTextileid == viewModel.Id);
+        //    pd = MummyContext.Photodata.Single(x => x.Id == pdt.MainPhotodataid);
+        //    MummyContext.BurialmainTextile.Remove(bmt);
+        //    MummyContext.SaveChanges();
+
+        //    return RedirectToAction("BurialList");
+        //}
+        [HttpPost]
+        public IActionResult DeleteTextile(Textile viewModel, BurialmainTextile bmt, PhotodataTextile pdt, Photodata pd)
+        {
+            bmt = MummyContext.BurialmainTextile.Single(x => x.MainTextileid == viewModel.Id);
+            var pdts = MummyContext.PhotodataTextile.Where(x => x.MainTextileid == viewModel.Id).ToList();
+            foreach (var item in pdts)
+            {
+                pd = MummyContext.Photodata.Single(x => x.Id == item.MainPhotodataid);
+                MummyContext.PhotodataTextile.Remove(item);
+                MummyContext.Photodata.Remove(pd);
+            }
+            MummyContext.BurialmainTextile.Remove(bmt);
+            MummyContext.Textile.Remove(viewModel);
+            MummyContext.SaveChanges();
+
+            return RedirectToAction("BurialList");
         }
 
+
+        [HttpPost]
+        public IActionResult CreateBodyAnalysis(Bodyanalysischart ar)
+        {
+
+
+            MummyContext.Add(ar);
+            MummyContext.SaveChanges();
+            
+            return RedirectToAction("BurialList");
+
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBodyAnalysis(Bodyanalysischart viewModel)
+        {
+
+            MummyContext.Bodyanalysischart.Remove(viewModel);
+            MummyContext.SaveChanges();
+
+            return RedirectToAction("BurialList");
+        }
 
 
         public IActionResult Privacy()
@@ -209,6 +389,8 @@ namespace INTEX.Controllers
             {
                 var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
                 var maxbId = MummyContext.Burialmain.Max(x => x.Id);
+                var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
+                ViewBag.maxtexxxid = maxtexxxid + 1;
                 ViewBag.maxbId = maxbId;
                 ViewBag.maxtextileid = maxtextileid + 1;
             }
@@ -216,6 +398,8 @@ namespace INTEX.Controllers
             {
                 ViewBag.maxbId = bvm.burialid;
                 ViewBag.maxbId = bvm.MaxTextileId;
+                var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
+                ViewBag.maxtexxxid = maxtexxxid +1;
             }
                 return View("asktextile", new BurialmainTextile());
         }
@@ -242,6 +426,8 @@ namespace INTEX.Controllers
 
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             var maxbId = MummyContext.Burialmain.Max(x => x.Id);
+            var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
+            ViewBag.maxtexxxid = maxtexxxid + 1;
             ViewBag.maxtextileid = maxtextileid;
             ViewBag.maxbId = maxbId;
             return View("CreateTextile", new Textile());
@@ -252,7 +438,8 @@ namespace INTEX.Controllers
         {
 
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
-
+            var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
+            ViewBag.maxtexxxid = maxtexxxid;
             ViewBag.maxtextileid = maxtextileid;
             return View("asktextile", new Textile());
         }
@@ -459,7 +646,8 @@ namespace INTEX.Controllers
                     MummyContext.BurialmainTextile.Add(Burialmain);
                     MummyContext.SaveChanges();
                     var photoid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
-
+                    var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
+                    ViewBag.maxtexxxid = maxtexxxid + 1;
                     ViewBag.maxtextileid = photoid;
 
                     return View("CreateTextile", new Textile());
