@@ -7,7 +7,91 @@
 @*@model IQueryable<Burialmain>*@
 @model BurialViewModel
 
+@*<p>Selected: @ViewBag.test</p> *@
+
 <h1>Fag el-Gamous Burials</h1>
+
+<div>
+    <form method="post" asp-action="BurialList">
+
+        <p>Filter by</p>
+
+        <select name="area">
+            <option value="">area</option>
+            @foreach (string area in Model.FilterForm.Areas)
+            {
+                <option name="filterArea" value="@area">@area</option>
+            }
+        </select>
+
+
+        <select name="burialnumber">
+            <option value="">burial number</option>
+            @foreach (string burialnum in Model.FilterForm.Burialnumbers)
+            {
+                <option value="@burialnum">@burialnum</option>
+            }
+        </select>
+
+
+        <select name="depth">
+            <option value="">depth</option>
+            @foreach (string depth in Model.FilterForm.Depths)
+            {
+                <option value="@depth">@depth</option>
+            }
+        </select>
+
+
+        <select name="headdirection">
+            <option value="">head direction</option>
+            @foreach (string direction in Model.FilterForm.Headdirections)
+            {
+                <option value="@direction">@direction</option>
+            }
+        </select>
+
+
+        <select name="ageatdeath">
+            <option value="">age at death</option>
+            @foreach (string age in Model.FilterForm.Ageatdeaths)
+            {
+                <option value="@age">@age</option>
+            }
+        </select>
+
+
+        <select name="length">
+            <option value="">estimate stature</option>
+            @foreach (string stature in Model.FilterForm.Lengths)
+            {
+                <option value="@stature">@stature</option>
+            }
+        </select>
+
+
+        <select name="sex">
+            <option value="">sex</option>
+            @foreach (string sex in Model.FilterForm.Sexs)
+            {
+                <option value="@sex">@sex</option>
+            }
+        </select>
+
+
+        <select name="haircolor">
+            <option value="">hair color</option>
+            @foreach (string color in Model.FilterForm.Haircolors)
+            {
+                <option value="@color">@color</option>
+            }
+        </select>
+
+
+        <button type="submit">Apply</button>
+
+    </form>
+</div>
 
 <table class="table table-bordered table-striped">
     <thead class="font-weight-bold">
@@ -23,31 +107,33 @@
             <td>Estimate Stature</td>
             <td>Sex</td>
             <td>Hair Color</td>
-            <td>Textile Structure</td>
-            <td>Textile Function</td>
-            <td>Textile Color</td>
+            <td>Details</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
     </thead>
     <tbody>
         @foreach (var x in Model.Burials)
         {
-        <tr>
-            <td>@x.Id</td>
-            <td>@x.Squarenorthsouth @x.Northsouth</td>
-            <td>@x.Squareeastwest @x.Eastwest</td>
-            <td>@x.Area</td>
-            <td>@x.Burialnumber</td>
-            <td>@x.Depth</td>
-            <td>@x.Headdirection</td>
-            <td>@x.Ageatdeath</td>
-            <td>@x.Length</td>
-            <td>@x.Sex</td>
-            <td>@x.Haircolor</td>
-            <td><a asp-controller="Home" asp-action="detailsburialitem" asp-route-id="@x.Id">View Details</a></td>
-            <td><a asp-controller="Home" asp-action="editBurialList" asp-route-id="@x.Id">Edit</a></td>
-            <td><a asp-controller="Home" asp-action="deleteBurialItem" asp-route-id="@x.Id">Delete</a></td>
-        </tr>
-        }
+           
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Squarenorthsouth @x.Northsouth</td>
+                <td>@x.Squareeastwest @x.Eastwest</td>
+                <td>@x.Area</td>
+                <td>@x.Burialnumber</td>
+                <td>@x.Depth</td>
+                <td>@x.Headdirection</td>
+                <td>@x.Ageatdeath</td>
+                <td>@x.Length</td>
+                <td>@x.Sex</td>
+                <td>@x.Haircolor</td>
+                <td><a asp-controller="Home" asp-action="detailsburialitem" asp-route-id="@x.Id">View Details</a></td>
+                <td><a asp-controller="Home" asp-action="editBurialList" asp-route-id="@x.Id">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="deleteBurialItem" asp-route-id="@x.Id">Delete</a></td>
+            </tr>
+              
+            }
     </tbody>
 
 </table>

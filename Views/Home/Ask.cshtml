@@ -1,0 +1,115 @@
+﻿@model (INTEX.Models.BurialmainTextile Burialmain, INTEX.Models.PhotodataTextile Photodata)
+
+@{ ViewData["Title"] = "Ask"; }
+
+<h1>Ask</h1>
+
+<h4>Textile</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Ask" asp-controller="Home">
+            <input type="hidden" name="formType" value="textile" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Burialmain.MainBurialmainid" class="control-label"></label>
+                <input asp-for="Burialmain.MainBurialmainid" class="form-control" value="@Model.Burialmain.MainBurialmainid" readonly />
+                <span asp-validation-for="Burialmain.MainBurialmainid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Burialmain.MainTextileid" class="control-label"></label>
+                <input asp-for="Burialmain.MainTextileid" class="form-control" value="@(ViewBag.maxtextileid + 1)" readonly />
+                <span asp-validation-for="Burialmain.MainTextileid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submitTextile" value="Add a Textile to this find?" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4>Photo</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Ask" asp-controller="Home">
+            <input type="hidden" name="formType" value="photo" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Photodata" class="control-label"></label>
+                <input asp-for="Photodata.MainPhotodataid" class="form-control" value="@(ViewBag.phototextid)" readonly />
+                <span asp-validation-for="Photodata.MainPhotodataid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photodata.MainTextileid" class="control-label"></label>
+                <<input asp-for="Photodata.MainTextileid" class="form-control" value="@Model.Photodata.MainTextileid" readonly />
+                <span asp-validation-for="Photodata.MainTextileid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submitPhoto" value="Add a photo for this textile?" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+@*@model INTEX.Models.ViewModels.BurialViewModel
+
+    @{ ViewData["Title"] = "Ask"; }
+
+    <h1>Ask</h1>
+
+    <h4>Textile</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="asktextile" asp-controller="Home">
+                <input type="hidden" name="formType" value="textile" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Burialmain.MainBurialmainid" class="control-label"></label>
+                    <input asp-for="Burialmain.MainBurialmainid" class="form-control" value="@Model." readonly />
+                    <span asp-validation-for="Burialmain.MainBurialmainid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Burialmain.MainTextileid" class="control-label"></label>
+                    <input asp-for="Burialmain.MainTextileid" class="form-control" value="@(ViewBag.maxtextileid + 1)" readonly />
+                    <span asp-validation-for="Burialmain.MainTextileid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submitTextile" value="Add a Textile to this find?" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h4>Photo</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="askphoto" asp-controller="Home">
+                <input type="hidden" name="formType" value="photo" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Photodata" class="control-label"></label>
+                    <input asp-for="Photodata.MainPhotodataid" class="form-control" value="@(ViewBag.phototextid)" readonly />
+                    <span asp-validation-for="Burialmain.MainTextileid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photodata.MainTextileid" class="control-label"></label>
+                    <<input asp-for="Photodata.MainTextileid" class="form-control" value="@ViewBag.maxtextileid" readonly />
+                    <span asp-validation-for="Photodata.MainTextileid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submitPhoto" value="Add a photo for this textile?" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
