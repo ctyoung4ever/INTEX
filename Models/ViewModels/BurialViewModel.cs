@@ -16,8 +16,11 @@ namespace INTEX.Models.ViewModels
         public List<Photodata>? Photos { get; internal set; }
         public C14 C14 { get; internal set; }
         public PhotodataTextile Photodata { get; set; }
-        public BurialmainTextile Burialmain { get; set; }
+        public BurialmainTextile Burialmain1 { get; set; }
         public long photoid { get; set; }
         public long burialid { get; set; }
+        public BurialmainTextile MaxBurialId { get; internal set; }
+        public BurialmainTextile MaxTextileId { get; internal set; }
+        public long Maxtextileid { get; set; }
     }
 }
