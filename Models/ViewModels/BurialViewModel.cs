@@ -7,6 +7,7 @@ namespace INTEX.Models.ViewModels
 {
     public class BurialViewModel
     {
+        public FilterForm FilterForm { get; set; }
         public List<Burialmain> Burials { get; set; }
         public PageInfo PageInfo { get; set; }
         public Burialmain BurialMain { get; internal set; }
