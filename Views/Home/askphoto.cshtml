@@ -1,0 +1,36 @@
+﻿@model INTEX.Models.PhotodataTextile
+
+@{ ViewData["Title"] = "askphoto"; }
+
+<h1>askphoto</h1>
+
+<h4>PhotodataTextile</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="askphoto">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MainPhotodataid" class="control-label"></label>
+                <input asp-for="MainPhotodataid" class="form-control" value="@ViewBag.phototextid" readonly />
+                <span asp-validation-for="MainPhotodataid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainTextileid" class="control-label"></label>
+                <input asp-for="MainTextileid" class="form-control" value="@ViewBag.maxtextileid" readonly />
+                <span asp-validation-for="MainTextileid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add a photo for this textile?" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
