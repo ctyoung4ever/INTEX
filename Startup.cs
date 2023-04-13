@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.ML.OnnxRuntime;
 
 namespace INTEX
 {
@@ -53,7 +54,22 @@ namespace INTEX
 
 
             services.AddControllersWithViews();
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+
+                //options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
             services.AddRazorPages();
+            //////////////////////////
+            services.AddSingleton<InferenceSession>
+                (
+                    new InferenceSession("Models/model.onnx")
+                );
+            services.AddCors();
+            ///////////////////////////
 
         }
 
@@ -74,11 +90,12 @@ namespace INTEX
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
 
             app.UseEndpoints(endpoints =>
@@ -88,6 +105,10 @@ namespace INTEX
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //////////////
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //////////////
 
             using (var scope = app.ApplicationServices.CreateScope())
             {
