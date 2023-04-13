@@ -1,20 +1,18 @@
 ﻿@model INTEX.Models.Textile
 
-@{ ViewData["Title"] = "View"; }
+@{
+    ViewData["Title"] = "EditTextile";
+}
 
-<h1>View</h1>
+<h1>EditTextile</h1>
 
 <h4>Textile</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateTextile">
+        <form asp-action="EditTextile">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" value="@ViewBag.maxtextileid" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Id" value="@Model.Id"/>
             <div class="form-group">
                 <label asp-for="Locale" class="control-label"></label>
                 <input asp-for="Locale" class="form-control" />
@@ -22,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Textileid" class="control-label"></label>
-                <input asp-for="Textileid" class="form-control" value="@ViewBag.maxtexxxid"/>
+                <input asp-for="Textileid" class="form-control" value="@Model.Textileid"/>
                 <span asp-validation-for="Textileid" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -56,7 +54,7 @@
                 <span asp-validation-for="Direction" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
