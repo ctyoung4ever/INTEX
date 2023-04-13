@@ -19,5 +19,8 @@ namespace INTEX.Models.ViewModels
         public BurialmainTextile Burialmain { get; set; }
         public long photoid { get; set; }
         public long burialid { get; set; }
+        public BurialmainTextile MaxBurialId { get; internal set; }
+        public BurialmainTextile MaxTextileId { get; internal set; }
+        public long Maxtextileid { get; set; }
     }
 }
