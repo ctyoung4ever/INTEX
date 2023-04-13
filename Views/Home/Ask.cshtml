@@ -1,4 +1,4 @@
-﻿@model (INTEX.Models.BurialmainTextile Burialmain, INTEX.Models.PhotodataTextile Photodata)
+﻿@model (INTEX.Models.BurialmainTextile BurialmainTextile, INTEX.Models.PhotodataTextile PhotodataTextile)
 
 @{ ViewData["Title"] = "Ask"; }
 
@@ -12,14 +12,14 @@
             <input type="hidden" name="formType" value="textile" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Burialmain.MainBurialmainid" class="control-label"></label>
-                <input asp-for="Burialmain.MainBurialmainid" class="form-control" value="@Model.Burialmain.MainBurialmainid" readonly />
-                <span asp-validation-for="Burialmain.MainBurialmainid" class="text-danger"></span>
+                <label asp-for="BurialmainTextile.MainBurialmainid" class="control-label"></label>
+                <input asp-for="BurialmainTextile.MainBurialmainid" class="form-control" value="@Model.BurialmainTextile.MainBurialmainid" readonly />
+                <span asp-validation-for="BurialmainTextile.MainBurialmainid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Burialmain.MainTextileid" class="control-label"></label>
-                <input asp-for="Burialmain.MainTextileid" class="form-control" value="@(ViewBag.maxtextileid + 1)" readonly />
-                <span asp-validation-for="Burialmain.MainTextileid" class="text-danger"></span>
+                <label asp-for="BurialmainTextile.MainTextileid" class="control-label"></label>
+                <input asp-for="BurialmainTextile.MainTextileid" class="form-control" value="@(Model.BurialmainTextile.MainTextileid + 1)" readonly />
+                <span asp-validation-for="BurialmainTextile.MainTextileid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" name="submitTextile" value="Add a Textile to this find?" class="btn btn-primary" />
@@ -37,14 +37,14 @@
             <input type="hidden" name="formType" value="photo" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Photodata" class="control-label"></label>
-                <input asp-for="Photodata.MainPhotodataid" class="form-control" value="@(ViewBag.phototextid)" readonly />
-                <span asp-validation-for="Photodata.MainPhotodataid" class="text-danger"></span>
+                <label asp-for="PhotodataTextile" class="control-label"></label>
+                <input asp-for="PhotodataTextile.MainPhotodataid" class="form-control" value="@(Model.PhotodataTextile.MainPhotodataid +1)" readonly />
+                <span asp-validation-for="PhotodataTextile.MainPhotodataid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Photodata.MainTextileid" class="control-label"></label>
-                <<input asp-for="Photodata.MainTextileid" class="form-control" value="@Model.Photodata.MainTextileid" readonly />
-                <span asp-validation-for="Photodata.MainTextileid" class="text-danger"></span>
+                <label asp-for="PhotodataTextile.MainTextileid" class="control-label"></label>
+                <<input asp-for="PhotodataTextile.MainTextileid" class="form-control" value="@Model.PhotodataTextile.MainTextileid" readonly />
+                <span asp-validation-for="PhotodataTextile.MainTextileid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" name="submitPhoto" value="Add a photo for this textile?" class="btn btn-primary" />

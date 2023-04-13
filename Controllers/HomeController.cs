@@ -145,7 +145,25 @@ namespace INTEX.Controllers
 
         //[Authorize(Roles ="Admin")]
 
+        [HttpGet]
+        public IActionResult EditBodyAnalysis(long burialmainid)
+        {
+            var bodyAnalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == burialmainid);
 
+            if (bodyAnalysis == null)
+            {
+                return NotFound();
+            }
+
+            return View(bodyAnalysis);
+        }
+        public IActionResult CreateBodyAnalysis(long burialmainid)
+        {
+            var bodyAnalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == burialmainid);
+
+
+            return View(bodyAnalysis);
+        }
 
 
 
@@ -425,33 +443,79 @@ namespace INTEX.Controllers
 
 
             var viewModel = new BurialmainTextile();
-            var photoData = new PhotodataTextile();
-            return View((viewModel, photoData));
+            var photoDataTextile = new PhotodataTextile();
+            return View((viewModel, photoDataTextile));
         }
+        
         [HttpPost]
-        public IActionResult Ask(string formType, BurialmainTextile viewModel, PhotodataTextile photoData)
+        public IActionResult Ask(string formType, BurialmainTextile Burialmain, PhotodataTextile Photodata)
         {
-            switch (formType)
+            if (formType == "textile")
             {
-                case "textile":
-                    // Handle submit for the textile form
-                    // Example:
-                    MummyContext.BurialmainTextile.Add(viewModel);
+                if (ModelState.IsValid)
+                {
+                    Burialmain.MainBurialmainid = MummyContext.BurialmainTextile.Max(x => x.MainBurialmainid);
+                    Burialmain.MainTextileid = (MummyContext.BurialmainTextile.Max(x => x.MainTextileid) + 1);
+                    MummyContext.BurialmainTextile.Add(Burialmain);
                     MummyContext.SaveChanges();
-                    return RedirectToAction("CreateTextile", new Textile());
+                    var photoid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
 
-                case "photo":
-                    // Handle submit for the photo form
-                    // Example:
-                    MummyContext.PhotodataTextile.Update(photoData);
+                    ViewBag.maxtextileid = photoid;
+
+                    return View("CreateTextile", new Textile());
+                }
+                else
+                {
+                    return View("Ask", (Burialmain, Photodata));
+                }
+            }
+            else if (formType == "photo")
+            {
+                if (ModelState.IsValid)
+                {
+                    Photodata.MainTextileid = MummyContext.PhotodataTextile.Max(x => x.MainTextileid);
+                    Photodata.MainPhotodataid = (MummyContext.PhotodataTextile.Max(x=> x.MainPhotodataid)+ 1);
+                    MummyContext.PhotodataTextile.Add(Photodata);
                     MummyContext.SaveChanges();
-                    return RedirectToAction("CreatePhoto", new Photodata());
+                    var photoid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
 
-                default:
-                    // Invalid form type
+                    ViewBag.phototextid = photoid;
+                    return View("CreatePhoto", new Photodata());
+                }
+                else
+                {
                     return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
             }
         }
+
+        //public IActionResult Ask(string formType, BurialmainTextile viewModel, PhotodataTextile photoDataTextile)
+        //{
+        //    switch (formType)
+        //    {
+        //        case "textile":
+        //            // Handle submit for the textile form
+        //            // Example:
+        //            MummyContext.BurialmainTextile.Add(viewModel);
+        //            MummyContext.SaveChanges();
+        //            return RedirectToAction("CreateTextile", new Textile());
+
+        //        case "photo":
+        //            // Handle submit for the photo form
+        //            // Example:
+        //            MummyContext.PhotodataTextile.Update(photoDataTextile);
+        //            MummyContext.SaveChanges();
+        //            return RedirectToAction("CreatePhoto", new PhotodataTextile());
+
+        //        default:
+        //            // Invalid form type
+        //            return BadRequest();
+        //    }
+        //}
 
     }
 }
