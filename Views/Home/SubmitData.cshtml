@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Prediction Input";
+    ViewBag.Title = "Prediction";
 }
 <style>
     .prediction-container {
@@ -29,208 +29,218 @@
         font-weight: bold;
     }
 </style>
- 
-<h2>Head Direction Prediction Form</h2>
+<section background-color: tan;>
+    <div class="container">
+        <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <h2>Head Direction Prediction Form</h2>
 
 
- 
-<form id="submit">
-    <div>
-        <label>Square North South:</label>
-        <input type="number" step="any" name="squarenorthsouth" required />
-    </div>
-    <div>
-        <label>Depth:</label>
-        <input type="number" step="any" name="depth" required />
-    </div>
-    <div>
-        <label>South To Head:</label>
-        <input type="number" step="any" name="southtohead" required />
-    </div>
-    <div>
-        <label>Square East West:</label>
-        <input type="number" step="any" name="squareeastwest" required />
-    </div>
-    <div>
-        <label>West To Head:</label>
-        <input type="number" step="any" name="westtohead" required />
-    </div>
-    <div>
-        <label>West To Feet:</label>
-        <input type="number" step="any" name="westtofeet" required />
-    </div>
-    <div>
-        <label>South To Feet:</label>
-        <input type="number" step="any" name="southtofeet" required />
-    </div>
 
-
-    
-
-
-    <div>
-        <label>East West:</label>
-        <input type="radio" name="eastwest_W" value="0" required /> East
-        <input type="radio" name="eastwest_W" value="1" /> West
-    </div>
-
-    <div>
-        <label>Wrapping = H:</label>
-        <input type="radio" name="wrapping_H" value="1" required /> Yes
-        <input type="radio" name="wrapping_H" value="0" /> No
-    </div>
-
-    <div>
-        <label>Wrapping = W:</label>
-        <input type="radio" name="wrapping_W" value="1" required /> Yes
-        <input type="radio" name="wrapping_W" value="0" /> No
-    </div>
-
-    <div>
-        <label>Area NNW:</label>
-        <input type="radio" name="area_NNW" value="1" required /> Yes
-        <input type="radio" name="area_NNW" value="0" /> No
-    </div>
-
-
-    <div>
-        <label>Area NW:</label>
-        <input type="radio" name="area_NW" value="1" required /> Yes
-        <input type="radio" name="area_NW" value="0" /> No
-    </div>
-
-
-    <div>
-        <label>Area SE:</label>
-        <input type="radio" name="area_SE" value="1" required /> Yes
-        <input type="radio" name="area_SE" value="0" /> No
-    </div>
-
-
-    <div>
-        <label>Area SW:</label>
-        <input type="radio" name="area_SW" value="1" required /> Yes
-        <input type="radio" name="area_SW" value="0" /> No
-    </div>
-
-
-    <div>
-        <label>Age at Death: Child:</label>
-        <input type="radio" name="ageatdeath_C" value="1" required /> Yes
-        <input type="radio" name="ageatdeath_C" value="0" /> No
-    </div>
-
-
-    <div>
-        <label>Age at Death: Infant:</label>
-        <input type="radio" name="ageatdeath_I" value="1" required /> Yes
-        <input type="radio" name="ageatdeath_I" value="0" /> No
-    </div>
-
-    <br />
-
-    <div>
-        <button type="submit" value="Submit" id="Submit">Submit</button>
-    </div>
-</form>
-
-
-<br />
-
-<div class="prediction-container">
-    <div class="prediction-title">Predicted Value:</div>
-    <div class="prediction-value" id="response"></div>
-</div>
+                        <form id="submit">
+                            <div>
+                                <label>Square North South:</label>
+                                <input type="number" step="any" name="squarenorthsouth" required />
+                            </div>
+                            <div>
+                                <label>Depth:</label>
+                                <input type="number" step="any" name="depth" required />
+                            </div>
+                            <div>
+                                <label>South To Head:</label>
+                                <input type="number" step="any" name="southtohead" required />
+                            </div>
+                            <div>
+                                <label>Square East West:</label>
+                                <input type="number" step="any" name="squareeastwest" required />
+                            </div>
+                            <div>
+                                <label>West To Head:</label>
+                                <input type="number" step="any" name="westtohead" required />
+                            </div>
+                            <div>
+                                <label>West To Feet:</label>
+                                <input type="number" step="any" name="westtofeet" required />
+                            </div>
+                            <div>
+                                <label>South To Feet:</label>
+                                <input type="number" step="any" name="southtofeet" required />
+                            </div>
 
 
 
 
-<script>
-    document.getElementById("submit").addEventListener("submit", function (event) {
-        event.preventDefault();
-        inputData();
-    });
+
+                            <div>
+                                <label>East West:</label>
+                                <input type="radio" name="eastwest_W" value="0" required /> East
+                                <input type="radio" name="eastwest_W" value="1" /> West
+                            </div>
+
+                            <div>
+                                <label>Wrapping = H:</label>
+                                <input type="radio" name="wrapping_H" value="1" required /> Yes
+                                <input type="radio" name="wrapping_H" value="0" /> No
+                            </div>
+
+                            <div>
+                                <label>Wrapping = W:</label>
+                                <input type="radio" name="wrapping_W" value="1" required /> Yes
+                                <input type="radio" name="wrapping_W" value="0" /> No
+                            </div>
+
+                            <div>
+                                <label>Area NNW:</label>
+                                <input type="radio" name="area_NNW" value="1" required /> Yes
+                                <input type="radio" name="area_NNW" value="0" /> No
+                            </div>
 
 
-        function inputData() {
-            const squarenorthsouthInput = parseFloat(document.querySelector('input[name="squarenorthsouth"]').value);
-            const depthInput = parseFloat(document.querySelector('input[name="depth"]').value);
-            const southtoheadInput = parseFloat(document.querySelector('input[name="southtohead"]').value);
-            const squareeastwestInput = parseFloat(document.querySelector('input[name="squareeastwest"]').value);
-            const westtoheadInput = parseFloat(document.querySelector('input[name="westtohead"]').value);
-            const westtofeetInput = parseFloat(document.querySelector('input[name="westtofeet"]').value);
-            const southtofeetInput = parseFloat(document.querySelector('input[name="southtofeet"]').value);
-            const eastwest_WInput = parseInt(document.querySelector('input[name="eastwest_W"]:checked').value);
-            const wrapping_HInput = parseInt(document.querySelector('input[name="wrapping_H"]:checked').value);
-            const wrapping_WInput = parseInt(document.querySelector('input[name="wrapping_W"]:checked').value);
-            const area_NNWInput = parseInt(document.querySelector('input[name="area_NNW"]:checked').value);
-            const area_NWInput = parseInt(document.querySelector('input[name="area_NW"]:checked').value);
-            const area_SEInput = parseInt(document.querySelector('input[name="area_SE"]:checked').value);
-            const area_SWInput = parseInt(document.querySelector('input[name="area_SW"]:checked').value);
-            const ageatdeath_CInput = parseInt(document.querySelector('input[name="ageatdeath_C"]:checked').value);
-            const ageatdeath_IInput = parseInt(document.querySelector('input[name="ageatdeath_I"]:checked').value);
-   
-
-            const inputData = {
-                'squarenorthsouth': squarenorthsouthInput,
-                'depth': depthInput,
-                'southtohead': southtoheadInput,
-                'squareeastwest': squareeastwestInput,
-                'westtohead': westtoheadInput,
-                'westtofeet': westtofeetInput,
-                'southtofeet': southtofeetInput,
-                'eastwest_W': eastwest_WInput,
-                'wrapping_H': wrapping_HInput,
-                'wrapping_W': wrapping_WInput,
-                'area_NNW': area_NNWInput,
-                'area_NW': area_NWInput,
-                'area_SE': area_SEInput,
-                'area_SW': area_SWInput,
-                'ageatdeath_C': ageatdeath_CInput,
-                'ageatdeath_I': ageatdeath_IInput
-            }
-            callApi(inputData);
-    }
-
-    console.log(json);
+                            <div>
+                                <label>Area NW:</label>
+                                <input type="radio" name="area_NW" value="1" required /> Yes
+                                <input type="radio" name="area_NW" value="0" /> No
+                            </div>
 
 
-    async function callApi(inputData) {
-        // serialize the JSON object to a string
-        var jsonString = JSON.stringify(inputData);
+                            <div>
+                                <label>Area SE:</label>
+                                <input type="radio" name="area_SE" value="1" required /> Yes
+                                <input type="radio" name="area_SE" value="0" /> No
+                            </div>
 
-        try {
-            // send the POST request to the URL
-            const response = await fetch("https://localhost:44374/score", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonString
-            });
 
-            // get the response content as a string
-            var responseString = await response.text();
+                            <div>
+                                <label>Area SW:</label>
+                                <input type="radio" name="area_SW" value="1" required /> Yes
+                                <input type="radio" name="area_SW" value="0" /> No
+                            </div>
 
-            // do something with the response
-            console.log(responseString);
 
-            let trimmedString = responseString.substring(19, responseString.length - 2);
-            //console.log(trimmedString);
-            var holder 
-            if (trimmedString == 'E') {
-                holder = "Head Direction: East"
-            }
-            else if (trimmedString == "W")
-            {
-                holder = "Head Direction: West"
+                            <div>
+                                <label>Age at Death: Child:</label>
+                                <input type="radio" name="ageatdeath_C" value="1" required /> Yes
+                                <input type="radio" name="ageatdeath_C" value="0" /> No
+                            </div>
 
-            }
-            document.getElementById("response").innerHTML = holder;
-        } catch (error) {
-            // handle the exception
-            console.error(error);
-        }
-    }
 
-</script>
+                            <div>
+                                <label>Age at Death: Infant:</label>
+                                <input type="radio" name="ageatdeath_I" value="1" required /> Yes
+                                <input type="radio" name="ageatdeath_I" value="0" /> No
+                            </div>
+
+                            <br />
+
+                            <div>
+                                <button type="submit" value="Submit" id="Submit">Submit</button>
+                            </div>
+                        </form>
+
+
+                        <br />
+
+                        <div class="prediction-container">
+                            <div class="prediction-title">Predicted Value:</div>
+                            <div class="prediction-value" id="response"></div>
+                        </div>
+
+
+
+
+                        <script>
+                            document.getElementById("submit").addEventListener("submit", function (event) {
+                                event.preventDefault();
+                                inputData();
+                            });
+
+
+                            function inputData() {
+                                const squarenorthsouthInput = parseFloat(document.querySelector('input[name="squarenorthsouth"]').value);
+                                const depthInput = parseFloat(document.querySelector('input[name="depth"]').value);
+                                const southtoheadInput = parseFloat(document.querySelector('input[name="southtohead"]').value);
+                                const squareeastwestInput = parseFloat(document.querySelector('input[name="squareeastwest"]').value);
+                                const westtoheadInput = parseFloat(document.querySelector('input[name="westtohead"]').value);
+                                const westtofeetInput = parseFloat(document.querySelector('input[name="westtofeet"]').value);
+                                const southtofeetInput = parseFloat(document.querySelector('input[name="southtofeet"]').value);
+                                const eastwest_WInput = parseInt(document.querySelector('input[name="eastwest_W"]:checked').value);
+                                const wrapping_HInput = parseInt(document.querySelector('input[name="wrapping_H"]:checked').value);
+                                const wrapping_WInput = parseInt(document.querySelector('input[name="wrapping_W"]:checked').value);
+                                const area_NNWInput = parseInt(document.querySelector('input[name="area_NNW"]:checked').value);
+                                const area_NWInput = parseInt(document.querySelector('input[name="area_NW"]:checked').value);
+                                const area_SEInput = parseInt(document.querySelector('input[name="area_SE"]:checked').value);
+                                const area_SWInput = parseInt(document.querySelector('input[name="area_SW"]:checked').value);
+                                const ageatdeath_CInput = parseInt(document.querySelector('input[name="ageatdeath_C"]:checked').value);
+                                const ageatdeath_IInput = parseInt(document.querySelector('input[name="ageatdeath_I"]:checked').value);
+
+
+                                const inputData = {
+                                    'squarenorthsouth': squarenorthsouthInput,
+                                    'depth': depthInput,
+                                    'southtohead': southtoheadInput,
+                                    'squareeastwest': squareeastwestInput,
+                                    'westtohead': westtoheadInput,
+                                    'westtofeet': westtofeetInput,
+                                    'southtofeet': southtofeetInput,
+                                    'eastwest_W': eastwest_WInput,
+                                    'wrapping_H': wrapping_HInput,
+                                    'wrapping_W': wrapping_WInput,
+                                    'area_NNW': area_NNWInput,
+                                    'area_NW': area_NWInput,
+                                    'area_SE': area_SEInput,
+                                    'area_SW': area_SWInput,
+                                    'ageatdeath_C': ageatdeath_CInput,
+                                    'ageatdeath_I': ageatdeath_IInput
+                                }
+                                callApi(inputData);
+                            }
+
+                            console.log(json);
+
+
+                            async function callApi(inputData) {
+                                // serialize the JSON object to a string
+                                var jsonString = JSON.stringify(inputData);
+
+                                try {
+                                    // send the POST request to the URL
+                                    const response = await fetch("https://localhost:44374/score", {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: jsonString
+                                    });
+
+                                    // get the response content as a string
+                                    var responseString = await response.text();
+
+                                    // do something with the response
+                                    console.log(responseString);
+
+                                    let trimmedString = responseString.substring(19, responseString.length - 2);
+                                    //console.log(trimmedString);
+                                    var holder
+                                    if (trimmedString == 'E') {
+                                        holder = "Head Direction: East"
+                                    }
+                                    else if (trimmedString == "W") {
+                                        holder = "Head Direction: West"
+
+                                    }
+                                    document.getElementById("response").innerHTML = holder;
+                                } catch (error) {
+                                    // handle the exception
+                                    console.error(error);
+                                }
+                            }
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
