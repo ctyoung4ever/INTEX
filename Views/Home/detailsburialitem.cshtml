@@ -252,22 +252,20 @@
             <td>@Model.BodyAnalysis.Squarenorthsouth</td>
         </tr>
 
-        <br />
-    }
+                        <br />}
     @foreach (var i in Model.Photos)
     {
-        <tr>
-            <td>@i.Id</td>
-            <td>@i.Description</td>
-        </tr>
-        <br />
-    }
+<tr>
+    <td>@i.Id</td>
+    <td>@i.Description</td>
+</tr>
+                <br />}
 
     @if (Model.C14 != null)
     {
-        <tr>
-            <td>@Model.C14.Id</td>
-            <td>@Model.C14.Agebp</td>
-        </tr>
+<tr>
+    <td>@Model.C14.Id</td>
+    <td>@Model.C14.Agebp</td>
+</tr>}
     }
 </tbody>

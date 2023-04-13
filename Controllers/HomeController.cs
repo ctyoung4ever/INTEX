@@ -183,11 +183,12 @@ namespace INTEX.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         [HttpGet]
+        [HttpGet]
         public IActionResult asktextile()
         {
             var maxbId = MummyContext.Burialmain.Max(x => x.Id);
-            
-            
+
+
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             ViewBag.maxbId = maxbId;
             ViewBag.maxtextileid = maxtextileid + 1;
@@ -199,22 +200,22 @@ namespace INTEX.Controllers
         [HttpPost]
         public IActionResult asktextile(BurialmainTextile ar)
         {
-            //MummyContext.Add(ar);
-            //MummyContext.SaveChanges();
-            
+            MummyContext.Add(ar);
+            MummyContext.SaveChanges();
+
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
-            
+
             ViewBag.maxtextileid = maxtextileid;
             return View("CreateTextile", new Textile());
 
-            
+
         }
         [HttpGet]
         public IActionResult CreateTextile()
         {
-            
+
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
-            
+
             ViewBag.maxtextileid = maxtextileid;
             return View("asktextile", new Textile());
         }
@@ -224,22 +225,22 @@ namespace INTEX.Controllers
         [HttpPost]
         public IActionResult CreateTextile(Textile ar)
         {
-            //MummyContext.Add(ar);
-            //MummyContext.SaveChanges();
+            MummyContext.Update(ar);
+            MummyContext.SaveChanges();
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             var phototextid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
             ViewBag.maxtextileid = maxtextileid;
             ViewBag.phototextid = phototextid + 1;
 
             return View("askphoto", new PhotodataTextile());
-            
-            
+
+
         }
 
         [HttpGet]
         public IActionResult askphoto()
         {
-            
+
             var maxtextileid = MummyContext.Textile.Max(x => x.Id);
             var phototextid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
             ViewBag.maxtextileid = maxtextileid;
@@ -251,10 +252,23 @@ namespace INTEX.Controllers
 
 
         [HttpPost]
-        public IActionResult askphoto(PhotodataTextile ar)
+        public IActionResult askphoto(PhotodataTextile ar, BurialViewModel bvm)
         {
-            //MummyContext.Add(ar);
-            //MummyContext.SaveChanges();
+
+            if (ar.MainTextileid == 0)
+            {
+                ar.MainTextileid = bvm.Photodata.MainTextileid;
+                ar.MainPhotodataid = bvm.Photodata.MainPhotodataid;
+                MummyContext.Add(ar);
+                MummyContext.SaveChanges();
+            }
+
+            else
+            {
+                MummyContext.Add(ar);
+                MummyContext.SaveChanges();
+
+            }
 
             var photoid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
 
@@ -278,25 +292,26 @@ namespace INTEX.Controllers
         [HttpPost]
         public IActionResult CreatePhoto(Photodata ar)
         {
-            //MummyContext.Add(ar);
-            //MummyContext.SaveChanges();
+            MummyContext.Add(ar);
+            MummyContext.SaveChanges();
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             var phototextid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
             ViewBag.maxtextileid = maxtextileid;
             ViewBag.phototextid = phototextid + 1;
 
 
+
             var maxBurialmainId = MummyContext.Burialmain.Max(x => x.Id);
             var maxTextileId = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             var maxPhotodataId = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
 
-            var model = new AskViewModel
+            // Create a new instance of the PhotoBurialViewModel and populate it with data from both models
+            BurialViewModel viewModel = new BurialViewModel()
             {
-                MaxBurialmainId = maxBurialmainId,
-                MaxTextileId = maxTextileId,
-                MaxPhotodataId = maxPhotodataId
+                Photodata = MummyContext.PhotodataTextile.Single(x => x.MainPhotodataid == maxPhotodataId),
+                Burialmain = MummyContext.BurialmainTextile.Single(x => x.MainTextileid == maxTextileId)
             };
-            return View("ask", model);
+            return View("ask");
 
 
         }
@@ -338,21 +353,36 @@ namespace INTEX.Controllers
         //        return BadRequest();
         //    }
         //}
+        //[HttpGet]
+        //public IActionResult Ask()
+        //{
+        //    var maxBurialmainId = MummyContext.Burialmain.Max(x => x.Id);
+        //    var maxTextileId = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
+        //    var maxPhotodataId = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
+
+
+
+        //    return View();
+        //}
         [HttpGet]
         public IActionResult Ask()
         {
-            var maxBurialmainId = MummyContext.Burialmain.Max(x => x.Id);
-            var maxTextileId = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
-            var maxPhotodataId = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
 
-            var model = new AskViewModel
-            {
-                MaxBurialmainId = maxBurialmainId,
-                MaxTextileId = maxTextileId,
-                MaxPhotodataId = maxPhotodataId
-            };
+            var maxtextileid = MummyContext.Textile.Max(x => x.Id);
+            var phototextid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
+            ViewBag.maxtextileid = maxtextileid;
+            ViewBag.phototextid = phototextid + 1;
 
-            return View(model);
+            //return View("askphoto", new PhotodataTextile());
+            var maxbId = MummyContext.Burialmain.Max(x => x.Id);
+
+
+            var maxbtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
+            ViewBag.maxbId = maxbId;
+            ViewBag.maxbtextileid = maxbtextileid + 1;
+
+
+            return View(new BurialViewModel());
         }
     }
 }
