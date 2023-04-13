@@ -318,7 +318,10 @@ namespace INTEX.Controllers
         //[Authorize(Roles ="Admin")]
 
 
-
+        public IActionResult Unsupervised()
+        {
+            return View();
+        }
 
 
         public IActionResult Privacy()
