@@ -36,7 +36,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Authorized")]
+        //[Authorize(Roles = "Authorized")]
         public IActionResult BurialList(int pageNum = 1)
         {
             int pageSize = 50;
@@ -136,6 +136,16 @@ namespace INTEX.Controllers
             }
 
         }
+
+        //controller to go to the prediction form page
+        [HttpGet]
+        public ActionResult SubmitData()
+        {
+            return View();
+        }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

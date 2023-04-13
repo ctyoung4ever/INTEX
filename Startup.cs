@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.ML.OnnxRuntime;
 
 namespace INTEX
 {
@@ -41,6 +42,13 @@ namespace INTEX
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            //////////////////////////
+            services.AddSingleton<InferenceSession>
+                (
+                    new InferenceSession("Models/model.onnx")
+                );
+            services.AddCors();
+            ///////////////////////////
 
         }
 
@@ -67,7 +75,6 @@ namespace INTEX
             app.UseAuthorization();
 
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -75,6 +82,10 @@ namespace INTEX
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //////////////
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //////////////
 
             using (var scope = app.ApplicationServices.CreateScope())
             {
