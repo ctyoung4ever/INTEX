@@ -228,23 +228,71 @@
     </div>
 
 <p><strong>Burial ID:</strong> @Model.BurialMain.Id</p>
-<tbody>
-    <!-- Access other burial main properties as needed -->
 
-
-    @foreach (var i in Model.Textile)
-    {
+<!--Textile table-->
+<h3>Textiles</h3>
+<table class="table table-bordered table-striped">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>ID</td>
+            <td>Locale</td>
+            <td>TextileID</td>
+            <td>Description</td>
+            <td>BurialNumber</td>
+            <td>Estimated Period</td>
+            <td>Photographed Date</td>
+            <td>Direction</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model.Textile)
+        {
         <tr>
             <td>@i.Id</td>
             <td>@i.Locale</td>
-            <td>@i.Description</td>
             <td>@i.Textileid</td>
+            <td>@i.Description</td>
             <td>@i.Burialnumber</td>
             <td>@i.Estimatedperiod</td>
+            <td>@i.Photographeddate</td>
+            <td>@i.Direction</td>
 
         </tr>
-        <br />
-    }
+        }
+        </tbody>
+</table>
+
+<!--Photo Table-->
+<h3>Photos</h3>
+<table class="table table-bordered table-striped">
+    <thead class="font-weight-bold">
+        <tr >
+            <td>ID</td>
+            <td>Description</td>
+            <td>Filename</td>
+            <td>PhotoDataID</td>
+            <td>Date</td>
+            <td>URL</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model.Photos)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Description</td>
+                <td>@i.Filename</td>
+                <td>@i.Photodataid</td>
+                <td>@i.Date</td>
+                <td>@i.Url</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+    <!-- Access other burial main properties as needed -->
+
+
     @if (Model.BodyAnalysis != null)
     {
         <tr>
@@ -252,14 +300,7 @@
             <td>@Model.BodyAnalysis.Squarenorthsouth</td>
         </tr>
 
-                        <br />}
-    @foreach (var i in Model.Photos)
-    {
-<tr>
-    <td>@i.Id</td>
-    <td>@i.Description</td>
-</tr>
-                <br />}
+                        <br />
 
     @if (Model.C14 != null)
     {
@@ -268,4 +309,4 @@
     <td>@Model.C14.Agebp</td>
 </tr>}
     }
-</tbody>
+
