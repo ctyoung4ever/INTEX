@@ -15,9 +15,6 @@ namespace INTEX.Models.ViewModels
         public Bodyanalysischart? BodyAnalysis { get; internal set; }
         public List<Photodata>? Photos { get; internal set; }
         public C14 C14 { get; internal set; }
-        public PhotodataTextile Photodata { get; set; }
-        public BurialmainTextile Burialmain { get; set; }
-        public long photoid { get; set; }
-        public long burialid { get; set; }
+>>>>>>>>> Temporary merge branch 2
     }
 }
