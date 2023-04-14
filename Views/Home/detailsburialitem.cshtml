@@ -315,19 +315,22 @@
 
     @if (Model.BodyAnalysis != null)
     {
-        <tr>
-        <td><a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BodyAnalysis.Id" asp-controller="Home" asp-action="EditBodyAnalysis">Edit</a></td>
-        <td><a asp-controller="Home" asp-action="DeleteBodyAnalysis" asp-route-id="@Model.BodyAnalysis.Id">Delete</a></td>
-        
-            <td>@Model.BodyAnalysis.Id</td>
-            <td>@Model.BodyAnalysis.Squarenorthsouth</td>
-        </tr>
+        <h1>Body Analysis</h1>
+        <table>
+            <tr>
+                <td><a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BodyAnalysis.Id" asp-controller="Home" asp-action="EditBodyAnalysis">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="DeleteBodyAnalysis" asp-route-id="@Model.BodyAnalysis.Id">Delete</a></td>
 
+                <td>@Model.BodyAnalysis.Id</td>
+                <td>@Model.BodyAnalysis.Squarenorthsouth</td>
+            </tr>
+        </table>
         <br />
     }
     else
     {
-        <a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BurialMain.Id" asp-controller="Home" asp-action="CreateBodyAnalysis">Create</a>
+        <h1>There is no Body Analysis Currently</h1>
+        <a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BurialMain.Id" asp-controller="Home" asp-action="CreateBodyAnalysis">Create Body Analysis</a>
     }
     
 
@@ -342,7 +345,7 @@
             <td>@Model.C14.Agebp</td>
         </tr>
     }
-    }
+    
 
                 </div>
             </div>
