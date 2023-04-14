@@ -519,6 +519,7 @@ namespace INTEX.Controllers
             MummyContext.SaveChanges();
 
             return RedirectToAction("BurialList");
+        }
 
         public IActionResult Unsupervised()
         {
