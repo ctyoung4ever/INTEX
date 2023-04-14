@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INTEX.ModelsTest;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace INTEX.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AspNetRolesController : Controller
     {
         private readonly ApplicationDbContext _context;
