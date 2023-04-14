@@ -110,8 +110,11 @@
             <td>Sex</td>
             <td>Hair Color</td>
             <td>Details</td>
+             @if (User.IsInRole("Admin"))
+                {
             <td>Edit</td>
             <td>Delete</td>
+                }
         </tr>
     </thead>
     <tbody>
@@ -130,9 +133,16 @@
                 <td>@x.Length</td>
                 <td>@x.Sex</td>
                 <td>@x.Haircolor</td>
-                <td><a asp-controller="Home" asp-action="detailsburialitem" asp-route-id="@x.Id">View Details</a></td>
-                <td><a asp-controller="Home" asp-action="editBurialList" asp-route-id="@x.Id">Edit</a></td>
-                <td><a asp-controller="Home" asp-action="deleteBurialItem" asp-route-id="@x.Id">Delete</a></td>
+               
+                    <td><a asp-controller="Home" asp-action="detailsburialitem" asp-route-id="@x.Id">View Details</a></td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td><a asp-controller="Home" asp-action="editBurialList" asp-route-id="@x.Id">Edit</a></td>
+                    <td><a asp-controller="Home" asp-action="deleteBurialItem" asp-route-id="@x.Id">Delete</a></td>
+                } else
+                {
+                    
+                }
             </tr>
               
             }
