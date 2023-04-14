@@ -15,7 +15,6 @@
 
 <!-- Access other textile properties as needed -->
 <h1>View</h1>
-
     <div>
         <h4>Burialmain</h4>
         <hr />
@@ -238,6 +237,7 @@
 
 <p><strong>Burial ID:</strong> @Model.BurialMain.Id</p>
 
+
 <!--Textile table-->
 <h3>Textiles</h3>
 <table class="table table-bordered table-striped">
@@ -256,6 +256,7 @@
     <tbody>
         @foreach (var i in Model.Textile)
         {
+
         <tr>
             <td>@i.Id</td>
             <td>@i.Locale</td>
@@ -263,6 +264,13 @@
             <td>@i.Description</td>
             <td>@i.Burialnumber</td>
             <td>@i.Estimatedperiod</td>
+
+            <a class="nav-link text-dark" asp-area="" asp-route-id="@i.Id" asp-controller="Home" asp-action="EditTextile">Edit Textile @i.Id</a>
+            <td><a asp-controller="Home" asp-action="DeleteTextile" asp-route-id="@i.Id">Delete Item @i.Id</a></td>
+        </tr>
+        <br />
+    }
+
             <td>@i.Photographeddate</td>
             <td>@i.Direction</td>
 
@@ -302,22 +310,45 @@
     <!-- Access other burial main properties as needed -->
 
 
+
     @if (Model.BodyAnalysis != null)
     {
+        <td><a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BodyAnalysis.Id" asp-controller="Home" asp-action="EditBodyAnalysis">Edit</a></td>
+        <td><a asp-controller="Home" asp-action="DeleteBodyAnalysis" asp-route-id="@Model.BodyAnalysis.Id">Delete</a></td>
         <tr>
             <td>@Model.BodyAnalysis.Id</td>
             <td>@Model.BodyAnalysis.Squarenorthsouth</td>
         </tr>
 
+        <br />
+    }
+    else
+    {
+        <a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BurialMain.Id" asp-controller="Home" asp-action="CreateBodyAnalysis">Create</a>
+    }
+    @foreach (var i in Model.Photos)
+    {
+        <tr>
+            <td>@i.Id</td>
+            <td>@i.Description</td>
+            <a class="nav-link text-dark" asp-area="" asp-route-pictureid="@i.Id" asp-controller="Home" asp-action="EditPicture">Edit Photo</a>
+            <td><a asp-controller="Home" asp-action="DeletePicture" asp-route-id="@i.Id">Delete Item @i.Id</a></td>
+            <h1>Photos</h1>
+        </tr>
+        <br />
+    }
+
 
                         <br />
 
+
     @if (Model.C14 != null)
     {
-<tr>
-    <td>@Model.C14.Id</td>
-    <td>@Model.C14.Agebp</td>
-</tr>}
+        <tr>
+            <td>@Model.C14.Id</td>
+            <td>@Model.C14.Agebp</td>
+        </tr>
+    }
     }
 
                 </div>
