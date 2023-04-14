@@ -35,7 +35,7 @@ namespace INTEX
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
@@ -66,7 +66,7 @@ namespace INTEX
             //////////////////////////
             services.AddSingleton<InferenceSession>
                 (
-                    new InferenceSession("Models/model.onnx")
+                    new InferenceSession("wwwroot/model.onnx")
                 );
             services.AddCors();
             ///////////////////////////
