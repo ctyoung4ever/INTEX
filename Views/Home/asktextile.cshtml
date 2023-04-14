@@ -1,10 +1,14 @@
 ﻿@model INTEX.Models.BurialmainTextile
 
 @{ ViewData["Title"] = "asktextile"; }
+<div class="container">
+    <div class="about-heading-content">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded rounded p-5">
 
-<h1>asktextile</h1>
+<h1>Link a Textile?</h1>
 
-<h4>BurialmainTextile</h4>
 <hr />
 
 <div class="row">
@@ -29,9 +33,14 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+                        <a asp-action="BurialList">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

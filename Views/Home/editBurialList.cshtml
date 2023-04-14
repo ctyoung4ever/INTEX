@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "editBurialList";
 }
-
-<h1>editBurialList</h1>
+<div class="container">
+    <div class="about-heading-content">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 mx-auto">
+                <div class="bg-faded rounded p-5">
+<h1>Edit Burial Details</h1>
 
 <h4>Burialmain</h4>
 <hr />
@@ -191,9 +195,15 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+                        <a asp-action="BurialList">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

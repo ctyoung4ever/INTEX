@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.ML.OnnxRuntime;
 
 namespace INTEX
 {
@@ -39,8 +40,36 @@ namespace INTEX
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 12;
+                options.Password.RequiredUniqueChars = 3;
+            });
+
+
             services.AddControllersWithViews();
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+
+                //options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
             services.AddRazorPages();
+            //////////////////////////
+            services.AddSingleton<InferenceSession>
+                (
+                    new InferenceSession("Models/model.onnx")
+                );
+            services.AddCors();
+            ///////////////////////////
 
         }
 
@@ -61,11 +90,12 @@ namespace INTEX
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
 
             app.UseEndpoints(endpoints =>
@@ -75,6 +105,10 @@ namespace INTEX
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //////////////
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //////////////
 
             using (var scope = app.ApplicationServices.CreateScope())
             {
@@ -89,7 +123,7 @@ namespace INTEX
 
                 }
             }
-
+            
 
             //Admin User authorization RBAC
             using (var scope = app.ApplicationServices.CreateScope())
@@ -97,7 +131,7 @@ namespace INTEX
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
                 string email = "admin@admin.com";
-                string password = "Admin123*";
+                string password = "Adminpassword1*";
 
 
 
@@ -120,7 +154,7 @@ namespace INTEX
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
                 string email1 = "authorized@authorized.com";
-                string password1 = "Authorized123*";
+                string password1 = "Authorizedpassword1*";
 
 
                 if (await userManager.FindByEmailAsync(email1) == null)
@@ -144,7 +178,7 @@ namespace INTEX
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
                 string email2 = "public@public.com";
-                string password2 = "Public123*";
+                string password2 = "Publicpassword1*";
 
 
                 if (await userManager.FindByEmailAsync(email2) == null)
