@@ -21,17 +21,14 @@ namespace INTEX.Controllers
         private mummyContext MummyContext { get; set; }
        
         public HomeController(mummyContext con)
-        {
-            
+        { 
             MummyContext = con;
         }
-
 
         public IActionResult Index()
         {
             return View();
         }
-
 
         [Authorize(Roles = "Admin,Authorized,Public")]
         [HttpGet]
@@ -47,7 +44,6 @@ namespace INTEX.Controllers
             var length = MummyContext.Burialmain.Select(x => x.Length).Distinct().ToList();
             var sex = MummyContext.Burialmain.Select(x => x.Sex).Distinct().ToList();
             var haircolor = MummyContext.Burialmain.Select(x => x.Haircolor).Distinct().ToList();
-
 
             var x = new BurialViewModel
             {
@@ -174,8 +170,6 @@ namespace INTEX.Controllers
                     .Take(pageSize)
                     .ToList(),
 
-
-
                 PageInfo = new PageInfo
                 {
                     TotalNumBurials = query.Count(),
@@ -193,8 +187,6 @@ namespace INTEX.Controllers
         {
             var maxId = MummyContext.Burialmain.Max(x => x.Id);
             var pkid = maxId + 1;
-           
-
             ViewBag.Pkid = pkid; // Set the Pkid property of the ViewBag to pkid.Id
 
             return View("CreateBurialItem", new Burialmain());
@@ -204,47 +196,45 @@ namespace INTEX.Controllers
         [HttpPost]
         public IActionResult CreateBurialItem(Burialmain ar)
         {
-
-
             MummyContext.Add(ar);
             MummyContext.SaveChanges();
             var maxbId = MummyContext.Burialmain.Max(x => x.Id);
-
             var mummies = MummyContext.Burialmain.ToList();
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             ViewBag.maxbId = maxbId;
             ViewBag.maxtextileid = maxtextileid + 1;
             return View("asktextile", new BurialmainTextile());
-            
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeleteBurialItem(long id)
         {
             var burialItem = MummyContext.Burialmain.Single(x => x.Id == id);
 
-
-
             return View(burialItem);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult DeleteBurialItem(Burialmain viewModel, BurialmainTextile bmt, Textile t,  PhotodataTextile pdt, Photodata pd, Bodyanalysischart bac)
         {
+
             // Remove all textiles associated with the burial item
             var textiles = MummyContext.BurialmainTextile.Where(t => t.MainBurialmainid == viewModel.Id).ToList();
             foreach (var textile in textiles)
             {
                 //remove all photos associated with each textile
                 t = MummyContext.Textile.Single(x => x.Id == textile.MainTextileid);
-                
                 var pdts = MummyContext.PhotodataTextile.Where(x => x.MainTextileid == t.Id).ToList();
+
                 foreach (var item in pdts)
                 {
                     pd = MummyContext.Photodata.Single(x => x.Id == item.MainPhotodataid);
                     MummyContext.PhotodataTextile.Remove(item);
                     MummyContext.Photodata.Remove(pd);
                 }
+
                 MummyContext.BurialmainTextile.Remove(textile);
                 MummyContext.Textile.Remove(t);
                 
@@ -265,7 +255,6 @@ namespace INTEX.Controllers
         }
 
         [Authorize(Roles = "Admin,Authorized,Public")]
-
         public IActionResult detailsburialitem(long id)
         {
             var burialMain = MummyContext.Burialmain.SingleOrDefault(x => x.Id == id);
@@ -273,7 +262,6 @@ namespace INTEX.Controllers
             var textileIds = burialMainTextiles.Select(bt => bt.MainTextileid);
             var textiles = MummyContext.Textile.Where(t => textileIds.Contains(t.Id)).OrderBy(x => x.Id).ToList();
             var bodyanalysis = MummyContext.Bodyanalysischart.SingleOrDefault(x => x.Id == id);
-            
             var photoids = MummyContext.PhotodataTextile.Where(t => textileIds.Contains(t.MainTextileid));
             var newids = photoids.Select(bt => bt.MainPhotodataid);
             var photos = MummyContext.Photodata.Where(t => newids.Contains(t.Id)).ToList();
@@ -292,83 +280,82 @@ namespace INTEX.Controllers
             return View("detailsburialitem", viewModel);
         }
 
-
         [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult EditBodyAnalysis(long burialmainid)
         {
             var bodyAnalysis = MummyContext.Bodyanalysischart.Single(x => x.Id == burialmainid);
             
-            
-
             return View("EditBodyAnalysis", bodyAnalysis);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditPicture(long pictureid)
         {
             var Photo = MummyContext.Photodata.Single(x => x.Id == pictureid);
 
-
-
             return View("EditPicture", Photo);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditTextile(long id)
         {
             var Textile = MummyContext.Textile.Single(x => x.Id == id);
 
-
-
             return View("EditTextile", Textile);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult EditBodyAnalysis(Bodyanalysischart viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 MummyContext.Update(viewModel);
                 MummyContext.SaveChanges();
                 return RedirectToAction("BurialList");
             }
+
             else
             {
                 return View("BurialList");
             }
         }
+
         [HttpPost]
         public IActionResult EditPicture(Photodata viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 MummyContext.Update(viewModel);
                 MummyContext.SaveChanges();
                 return RedirectToAction("BurialList");
             }
+
             else
             {
                 return View("BurialList");
             }
         }
+
         [HttpPost]
         public IActionResult EditTextile(Textile tex)
         {
-
             if (ModelState.IsValid)
             {
                 MummyContext.Textile.Update(tex);
                 MummyContext.SaveChanges();
                 return RedirectToAction("BurialList");
             }
+
             else
             {
                 return Error();
             }
         }
+
         [Authorize(Roles = "Admin")]
         public IActionResult CreateBodyAnalysis(long burialmainid)
         {
@@ -378,47 +365,43 @@ namespace INTEX.Controllers
             {
                 Id = burialmainid
             };
+
             return View(viewModel);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeleteBodyAnalysis(long id)
         {
             var burialItem = MummyContext.Bodyanalysischart.Single(x => x.Id == id);
 
-
-
             return View(burialItem);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeletePicture(long id)
         {
             var photoid = MummyContext.Photodata.Single(x => x.Id == id);
-            
-            
-
+      
             return View(photoid);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeleteTextile(long id)
         {
             var textileid = MummyContext.Textile.Single(x => x.Id == id);
-
-
-
             return View(textileid);
         }
+
         [HttpPost]
         public IActionResult DeletePicture(Photodata viewModel, PhotodataTextile textile)
         {
-
             MummyContext.Photodata.Remove(viewModel);
             textile = MummyContext.PhotodataTextile.Single(x => x.MainPhotodataid == viewModel.Id);
             MummyContext.PhotodataTextile.Remove(textile);
             MummyContext.SaveChanges();
-
 
             return RedirectToAction("BurialList");
         }
@@ -435,6 +418,7 @@ namespace INTEX.Controllers
                 MummyContext.PhotodataTextile.Remove(item);
                 MummyContext.Photodata.Remove(pd);
             }
+
             MummyContext.BurialmainTextile.Remove(bmt);
             MummyContext.Textile.Remove(viewModel);
             MummyContext.SaveChanges();
@@ -442,23 +426,18 @@ namespace INTEX.Controllers
             return RedirectToAction("BurialList");
         }
 
-
         [HttpPost]
         public IActionResult CreateBodyAnalysis(Bodyanalysischart ar)
         {
-
-
             MummyContext.Add(ar);
             MummyContext.SaveChanges();
             
             return RedirectToAction("BurialList");
-
         }
 
         [HttpPost]
         public IActionResult DeleteBodyAnalysis(Bodyanalysischart viewModel)
         {
-
             MummyContext.Bodyanalysischart.Remove(viewModel);
             MummyContext.SaveChanges();
 
@@ -468,38 +447,36 @@ namespace INTEX.Controllers
         public IActionResult Unsupervised()
         {
             return View();
-
         }
-
 
         public IActionResult Privacy()
         {
             return View();
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult editBurialList(long id)
-        {
-
+        { 
             var application = MummyContext.Burialmain.Single(x => x.Id == id);
             return View("editBurialList", application);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult editBurialList(Burialmain viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 MummyContext.Update(viewModel);
                 MummyContext.SaveChanges();
                 return RedirectToAction("editBurialList");
             }
+
             else
             {
                 return View("BurialList");
             }
-
         }
 
         //controller to go to the prediction form page
@@ -509,19 +486,16 @@ namespace INTEX.Controllers
             return View();
         }
 
-
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult asktextile(BurialViewModel bvm)
         {
-
             if (bvm.burialid == 0)
             {
                 var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
@@ -531,6 +505,7 @@ namespace INTEX.Controllers
                 ViewBag.maxbId = maxbId;
                 ViewBag.maxtextileid = maxtextileid + 1;
             }
+
             if (bvm.burialid != 0)
             {
                 ViewBag.maxbId = bvm.burialid;
@@ -538,9 +513,9 @@ namespace INTEX.Controllers
                 var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
                 ViewBag.maxtexxxid = maxtexxxid +1;
             }
+
                 return View("asktextile", new BurialmainTextile());
         }
-
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -548,15 +523,14 @@ namespace INTEX.Controllers
         {
             if (ar.MainTextileid == 0)
             {
-                
                 ar.MainBurialmainid = bvm.burialid;
                 ar.MainTextileid = bvm.Maxtextileid;
                 MummyContext.Add(ar);
                 MummyContext.SaveChanges();
             }
+
             else
             {
-
                 MummyContext.Add(ar);
                 MummyContext.SaveChanges();
             }
@@ -573,14 +547,12 @@ namespace INTEX.Controllers
         [HttpGet]
         public IActionResult CreateTextile()
         {
-
             var maxtextileid = MummyContext.BurialmainTextile.Max(x => x.MainTextileid);
             var maxtexxxid = MummyContext.Textile.Max(x => x.Textileid);
             ViewBag.maxtexxxid = maxtexxxid;
             ViewBag.maxtextileid = maxtextileid;
             return View("asktextile", new Textile());
         }
-
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -594,14 +566,11 @@ namespace INTEX.Controllers
             ViewBag.phototextid = phototextid + 1;
 
             return View("askphoto", new PhotodataTextile());
-
-
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult askphoto()
         {
-
             var maxtextileid = MummyContext.Textile.Max(x => x.Id);
             var phototextid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
             ViewBag.maxtextileid = maxtextileid;
@@ -610,12 +579,10 @@ namespace INTEX.Controllers
             return View("askphoto", new PhotodataTextile());
         }
 
-
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult askphoto(PhotodataTextile ar, BurialViewModel bvm)
         {
-
             if (ar.MainTextileid == 0)
             {
                 ar.MainTextileid = bvm.Photodata.MainTextileid;
@@ -628,16 +595,13 @@ namespace INTEX.Controllers
             {
                 MummyContext.Add(ar);
                 MummyContext.SaveChanges();
-
             }
 
             var photoid = MummyContext.PhotodataTextile.Max(x => x.MainPhotodataid);
-
             ViewBag.phototextid = photoid;
             return View("CreatePhoto", new Photodata());
-
-
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreatePhoto()
@@ -686,17 +650,10 @@ namespace INTEX.Controllers
             ViewBag.maxtextileid = maxtextileid;
             ViewBag.phototextid = phototextid + 1;
 
-
-            //return View("askphoto", new PhotodataTextile());
-
-
-
-
             var viewModel = new BurialmainTextile();
             var photoDataTextile = new PhotodataTextile();
             return View((viewModel, photoDataTextile));
         }
-        
 
         [Authorize(Roles = "Admin")]
 
@@ -746,8 +703,5 @@ namespace INTEX.Controllers
                 return BadRequest();
             }
         }
-
-        
-
     }
 }
