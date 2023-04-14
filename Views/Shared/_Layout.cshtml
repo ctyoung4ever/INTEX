@@ -36,16 +36,30 @@
                             <a class="nav-link text-uppercase text-dark" asp-area="" asp-controller="Home" asp-action="BurialList">Burials</a>
                         </li>
                         @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase text-dark" asp-area="" asp-controller="Home" asp-action="CreateBurialItem">Create Burial Records</a>
-                                </li>
-                            } else
-                            {
-                                
-                            }
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase text-dark" asp-area="" asp-controller="Home" asp-action="CreateBurialItem">Create Burial Records</a>
+                            </li>
+                        }
+                        else
+                        {
 
-                    </ul>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase text-dark" asp-area="" asp-controller="AspNetUsers" asp-action="Index">Users</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase text-dark" asp-area="" asp-controller="AspNetRoles" asp-action="Index">User Roles</a>
+                            </li>
+                        }
+                        
+
+                        </ul>
                 </div>
             </div>
         </nav>

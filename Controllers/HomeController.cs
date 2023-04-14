@@ -237,6 +237,13 @@ namespace INTEX.Controllers
             return View(x);
         }
 
+        [HttpGet]
+        public IActionResult BodyAnalysisView(long burialmainid)
+        {
+            var viewModel = MummyContext.Bodyanalysischart.Single(x => x.Id == burialmainid);
+
+            return View(viewModel);
+        }
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateBurialItem()
