@@ -160,8 +160,8 @@ namespace INTEX.Data.Migrations
 
                     b.ToTable("AspNetUserClaims");
                 });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            //change
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(128)")
