@@ -40,7 +40,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Admin,Authorized,Public")]
+        //[Authorize(Roles = "Admin,Authorized,Public")]
         [HttpGet]
         public IActionResult BurialList(int pageNum = 1)
         {
@@ -237,7 +237,7 @@ namespace INTEX.Controllers
             return View(x);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateBurialItem()
         {
@@ -250,7 +250,7 @@ namespace INTEX.Controllers
             return View("CreateBurialItem", new Burialmain());
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CreateBurialItem(Burialmain ar)
         {
@@ -267,7 +267,7 @@ namespace INTEX.Controllers
             return View("asktextile", new BurialmainTextile());
             
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeleteBurialItem(long id)
         {
@@ -277,7 +277,7 @@ namespace INTEX.Controllers
 
             return View(burialItem);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult DeleteBurialItem(Burialmain viewModel, BurialmainTextile bmt, Textile t,  PhotodataTextile pdt, Photodata pd, Bodyanalysischart bac)
         {
@@ -314,7 +314,7 @@ namespace INTEX.Controllers
             return RedirectToAction("BurialList");
         }
 
-        [Authorize(Roles = "Admin,Authorized,Public")]
+        //[Authorize(Roles = "Admin,Authorized,Public")]
 
         public IActionResult detailsburialitem(long id)
         {
@@ -532,7 +532,7 @@ namespace INTEX.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult editBurialList(long id)
         {
@@ -540,7 +540,7 @@ namespace INTEX.Controllers
             var application = MummyContext.Burialmain.Single(x => x.Id == id);
             return View("editBurialList", application);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult editBurialList(Burialmain viewModel)
         {
@@ -573,7 +573,7 @@ namespace INTEX.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult asktextile(BurialViewModel bvm)
         {
@@ -598,7 +598,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult asktextile(BurialmainTextile ar, BurialViewModel bvm)
         {
@@ -625,7 +625,7 @@ namespace INTEX.Controllers
             ViewBag.maxbId = maxbId;
             return View("CreateTextile", new Textile());
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateTextile()
         {
@@ -638,7 +638,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CreateTextile(Textile ar)
         {
@@ -653,7 +653,7 @@ namespace INTEX.Controllers
 
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult askphoto()
         {
@@ -667,7 +667,7 @@ namespace INTEX.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult askphoto(PhotodataTextile ar, BurialViewModel bvm)
         {
@@ -694,7 +694,7 @@ namespace INTEX.Controllers
 
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreatePhoto()
         {
@@ -704,7 +704,7 @@ namespace INTEX.Controllers
             ViewBag.phototextid = maxtextileid;
             return View("askphoto", new Photodata());
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CreatePhoto(Photodata ar)
         {
@@ -806,7 +806,7 @@ namespace INTEX.Controllers
 
         //    return View();
         //}
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Ask()
         {
@@ -830,7 +830,7 @@ namespace INTEX.Controllers
         }
         
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
 
         [HttpPost]
         public IActionResult Ask(string formType, BurialmainTextile Burialmain, PhotodataTextile Photodata)

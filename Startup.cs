@@ -66,7 +66,7 @@ namespace INTEX
             //////////////////////////
             services.AddSingleton<InferenceSession>
                 (
-                    new InferenceSession("Models/model.onnx")
+                    new InferenceSession("wwwroot/model.onnx")
                 );
             services.AddCors();
             ///////////////////////////
