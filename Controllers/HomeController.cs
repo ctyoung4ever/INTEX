@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INTEX.Controllers
 {
@@ -28,7 +29,7 @@ namespace INTEX.Controllers
             MummyContext = con;
         }
 
-
+        
         public IActionResult Index()
         {
             return View();
@@ -105,6 +106,7 @@ namespace INTEX.Controllers
 
             return View("detailsburialitem", application);
         }
+        [Authorize(Roles = "User")]
         public IActionResult Privacy()
         {
             return View();
