@@ -828,7 +828,15 @@ namespace INTEX.Controllers
             var photoDataTextile = new PhotodataTextile();
             return View((viewModel, photoDataTextile));
         }
-        
+        [HttpGet]
+        public IActionResult BodyAnalysisView(long burialmainid)
+        {
+            var viewModel = MummyContext.Bodyanalysischart.Single(x => x.Id == burialmainid);
+
+            return View(viewModel);
+        }
+
+       
 
         //[Authorize(Roles = "Admin")]
 
