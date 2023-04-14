@@ -16,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" value="@ViewBag.maxtextileid" />
+                <input asp-for="Id" class="form-control" value="@ViewBag.maxtextileid" readonly/>
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Textileid" class="control-label"></label>
-                <input asp-for="Textileid" class="form-control" value="@ViewBag.maxtexxxid"/>
+                <input asp-for="Textileid" class="form-control" value="@ViewBag.maxtexxxid" readonly/>
                 <span asp-validation-for="Textileid" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -67,7 +67,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="BurialList">Back to List</a>
 </div>
 
 @section Scripts {
