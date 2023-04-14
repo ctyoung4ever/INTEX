@@ -23,4 +23,5 @@ namespace INTEX
                     webBuilder.UseStartup<Startup>();
                 });
     }
+
 }
