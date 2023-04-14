@@ -265,14 +265,11 @@
             <td>@i.Burialnumber</td>
             <td>@i.Estimatedperiod</td>
 
-            <a class="nav-link text-dark" asp-area="" asp-route-id="@i.Id" asp-controller="Home" asp-action="EditTextile">Edit Textile @i.Id</a>
-            <td><a asp-controller="Home" asp-action="DeleteTextile" asp-route-id="@i.Id">Delete Item @i.Id</a></td>
-        
-        <br />
-    
-
             <td>@i.Photographeddate</td>
             <td>@i.Direction</td>
+            <td><a class="nav-link text-dark" asp-area="" asp-route-id="@i.Id" asp-controller="Home" asp-action="EditTextile">Edit Textile @i.Id</a></td>
+            <td><a asp-controller="Home" asp-action="DeleteTextile" asp-route-id="@i.Id">Delete Item @i.Id</a></td>    
+
 
         </tr>
         }
@@ -290,20 +287,25 @@
             <td>PhotoDataID</td>
             <td>Date</td>
             <td>URL</td>
+            <td></td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         @foreach (var i in Model.Photos)
         {
-            <tr>
-                <td>@i.Id</td>
-                <td>@i.Description</td>
-                <td>@i.Filename</td>
-                <td>@i.Photodataid</td>
-                <td>@i.Date</td>
-                <td>@i.Url</td>
+        <tr>
+            <td>@i.Id</td>
+            <td>@i.Description</td>
+            <td>@i.Filename</td>
+            <td>@i.Photodataid</td>
+            <td>@i.Date</td>
+            <td>@i.Url</td>
+            <td><a class="nav-link text-dark" asp-area="" asp-route-pictureid="@i.Id" asp-controller="Home" asp-action="EditPicture">Edit Photo</a></td>
+            <td><a asp-controller="Home" asp-action="DeletePicture" asp-route-id="@i.Id">Delete Item @i.Id</a></td>
 
-            </tr>
+        </tr>
+            
         }
     </tbody>
 </table>
@@ -313,9 +315,10 @@
 
     @if (Model.BodyAnalysis != null)
     {
+        <tr>
         <td><a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BodyAnalysis.Id" asp-controller="Home" asp-action="EditBodyAnalysis">Edit</a></td>
         <td><a asp-controller="Home" asp-action="DeleteBodyAnalysis" asp-route-id="@Model.BodyAnalysis.Id">Delete</a></td>
-        <tr>
+        
             <td>@Model.BodyAnalysis.Id</td>
             <td>@Model.BodyAnalysis.Squarenorthsouth</td>
         </tr>
@@ -326,17 +329,7 @@
     {
         <a class="nav-link text-dark" asp-area="" asp-route-burialmainid="@Model.BurialMain.Id" asp-controller="Home" asp-action="CreateBodyAnalysis">Create</a>
     }
-    @foreach (var i in Model.Photos)
-    {
-        <tr>
-            <td>@i.Id</td>
-            <td>@i.Description</td>
-            <a class="nav-link text-dark" asp-area="" asp-route-pictureid="@i.Id" asp-controller="Home" asp-action="EditPicture">Edit Photo</a>
-            <td><a asp-controller="Home" asp-action="DeletePicture" asp-route-id="@i.Id">Delete Item @i.Id</a></td>
-            <h1>Photos</h1>
-        </tr>
-        <br />
-    }
+    
 
 
                         <br />
