@@ -135,10 +135,16 @@ namespace INTEX.ModelsTest
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
+            modelBuilder.Entity<AspNetUsers>()
+            .HasMany(e => e.AspNetUserRoles)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
+
 }
