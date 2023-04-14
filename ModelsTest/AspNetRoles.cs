@@ -1,9 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//using System;
+//using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+//// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+//// If you have enabled NRTs for your project, then un-comment the following line:
+//// #nullable disable
+
+//namespace INTEX.ModelsTest
+//{
+//    public partial class AspNetRoles
+//    {
+//        public AspNetRoles()
+//        {
+//            AspNetRoleClaims = new HashSet<AspNetRoleClaims>();
+//            AspNetUserRoles = new HashSet<AspNetUserRoles>();
+//        }
+
+//        public string Id { get; set; }
+//        public string Name { get; set; }
+//        public string NormalizedName { get; set; }
+//        public string ConcurrencyStamp { get; set; }
+
+//        public virtual ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+//        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+//    }
+//}
+using System;
+using System.Collections.Generic;
 
 namespace INTEX.ModelsTest
 {
@@ -11,8 +33,6 @@ namespace INTEX.ModelsTest
     {
         public AspNetRoles()
         {
-            AspNetRoleClaims = new HashSet<AspNetRoleClaims>();
-            AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
         public string Id { get; set; }
@@ -20,7 +40,8 @@ namespace INTEX.ModelsTest
         public string NormalizedName { get; set; }
         public string ConcurrencyStamp { get; set; }
 
-        public virtual ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
-        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual IEnumerable<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual IEnumerable<AspNetUserRoles> AspNetUserRoles { get; set; }
     }
 }
+

@@ -18,10 +18,10 @@ namespace INTEX.Controllers
             _context = context;
         }
 
+        // GET: AspNetRoles
         public async Task<IActionResult> Index()
         {
-            var roles = await _context.AspNetRoles.ToListAsync();
-            return View(roles);
+            return View(await _context.AspNetRoles.ToListAsync());
         }
 
         // GET: AspNetRoles/Details/5
